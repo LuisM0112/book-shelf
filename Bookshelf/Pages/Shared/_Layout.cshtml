@@ -1,25 +1,146 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>@ViewData["Title"] - Bookshelf</title>
+  <title>@ViewData["Title"] - Bookshelf</title>
 
-        <!-- Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
 
-        @RenderBody()
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.min.css" />
+</head>
 
-        <!-- Bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<body class="bg-light min-vh-100 d-flex flex-column">
 
-        <!-- SweetAlert2 -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<header class="sticky-top bg-white border-bottom shadow-sm">
+  <nav class="navbar navbar-expand-lg container px-3" aria-label="Navegación principal">
 
-        @await RenderSectionAsync("Scripts", required: false)
+    <a class="navbar-brand fw-bold text-primary" asp-page="/Index">
+      BOOKSHELF
+    </a>
 
-    </body>
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuPrincipal"
+            aria-controls="menuPrincipal"
+            aria-expanded="false"
+            aria-label="Mostrar menú de navegación">
+
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="menuPrincipal">
+
+      <div class="navbar-nav ms-lg-3">
+
+        <a class="nav-link"
+          asp-page="/Books/Index">
+          Catálogo
+        </a>
+
+
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+          <a class="nav-link"
+            asp-page="/Library/Index">
+            Mi biblioteca
+          </a>
+
+
+          @if (User.IsInRole("Admin"))
+          {
+            <a class="nav-link"
+              asp-page="/Proposals/Index">
+              Propuestas
+            </a>
+          }
+        }
+
+      </div>
+
+
+      <div class="dropdown ms-lg-auto">
+
+        <button class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+          @(User.Identity?.IsAuthenticated == true
+            ? User.Identity.Name
+            : "Usuario")
+        </button>
+
+
+        <ul class="dropdown-menu dropdown-menu-end">
+
+          @if (User.Identity?.IsAuthenticated == true)
+          {
+            <li>
+              <button class="dropdown-item">
+                Cerrar sesión
+              </button>
+            </li>
+
+            <li>
+              <button class="dropdown-item text-danger">
+                Eliminar cuenta
+              </button>
+            </li>
+          }
+          else
+          {
+            <li>
+              <a class="dropdown-item"
+                asp-page="/Account/Login">
+                Iniciar sesión
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item"
+                asp-page="/Account/Register">
+                Registrarse
+              </a>
+            </li>
+          }
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </nav>
+</header>
+
+
+<main role="main" class="container py-4 py-md-5 flex-grow-1">
+
+  @RenderBody()
+
+</main>
+
+
+<footer class="border-top bg-white py-4 text-center text-secondary">
+
+  Bookshelf - Proyecto final desarrollado con C#, Razor Pages, Bootstrap,
+  Entity Framework Core, MySQL y SweetAlert2
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js"></script>
+
+
+@await RenderSectionAsync("Scripts", required: false)
+
+</body>
 </html>
