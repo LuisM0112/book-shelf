@@ -1,25 +1,45 @@
-var builder = WebApplication.CreateBuilder(args);
+using Bookshelf.Data;
+using Bookshelf.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+// Entity Framework Core
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+  ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+  options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+
+// Identity
+builder.Services
+  .AddIdentity<User, IdentityRole>()
+  .AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddDefaultTokenProviders();
+
+// Razor Pages
 builder.Services.AddRazorPages();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+  app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
 app.MapRazorPages()
-   .WithStaticAssets();
+  .WithStaticAssets();
 
 app.Run();
