@@ -39,7 +39,13 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapRazorPages()
-  .WithStaticAssets();
+app.MapRazorPages().WithStaticAssets();
+
+using (IServiceScope scope = app.Services.CreateScope())
+{
+  IServiceProvider services = scope.ServiceProvider;
+
+  await DbInitializer.InitializeAsync(services);
+}
 
 app.Run();

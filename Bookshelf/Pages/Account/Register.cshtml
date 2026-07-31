@@ -1,0 +1,89 @@
+@page
+@model Bookshelf.Pages.Account.RegisterModel
+
+@{
+  ViewData["Title"] = "Registrarse";
+}
+
+<section class="container">
+  <div class="row justify-content-center">
+
+    <div class="col-md-6 col-lg-5">
+
+      <article class="card shadow-sm">
+
+        <div class="card-body">
+
+          <h1 class="h3 text-center mb-4">
+            Crear cuenta
+          </h1>
+
+
+          <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3">
+            </div>
+
+
+            <fieldset>
+              <legend class="visually-hidden">
+                Datos de Registro
+              </legend>
+              <div class="mb-3">
+
+                <label asp-for="Register.Username" class="form-label"></label>
+
+                <input asp-for="Register.Username" class="form-control" />
+
+                <span asp-validation-for="Register.Username" class="text-danger"></span>
+
+              </div>
+
+
+              <div class="mb-3">
+
+                <label asp-for="Register.Email" class="form-label"></label>
+
+                <input asp-for="Register.Email" class="form-control" type="email"/>
+
+                <span asp-validation-for="Register.Email" class="text-danger"></span>
+
+              </div>
+
+
+              <div class="mb-3">
+
+                <label asp-for="Register.Password" class="form-label"></label>
+
+                <input asp-for="Register.Password" class="form-control" type="password"/>
+
+                <span asp-validation-for="Register.Password" class="text-danger"></span>
+
+              </div>
+
+              <div class="mb-3">
+
+                <label asp-for="Register.ConfirmPassword" class="form-label"></label>
+
+                <input asp-for="Register.ConfirmPassword" class="form-control" />
+
+                <span asp-validation-for="Register.ConfirmPassword" class="text-danger"></span>
+
+              </div>
+            </fieldset>
+
+
+            <button type="submit" class="btn btn-primary w-100">
+              Registrarse
+            </button>
+
+          </form>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+</section>
