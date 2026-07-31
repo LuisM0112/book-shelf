@@ -9,4 +9,9 @@ public static class Messages
     public const string PasswordLength = "La contraseña debe tener al menos 6 caracteres.";
     public const string PasswordsDoNotMatch = "Las contraseñas no coinciden.";
   }
+
+  public static class User
+  {
+    public const string InvalidCredentials = "El nombre de usuario, correo electrónico o contraseña son incorrectos.";
+  }
 }

@@ -82,9 +82,11 @@
           @if (User.Identity?.IsAuthenticated == true)
           {
             <li>
-              <button class="dropdown-item">
-                Cerrar sesión
-              </button>
+              <form method="post" asp-page="/Account/Logout">
+                <button type="submit" class="dropdown-item">
+                  Cerrar sesión
+                </button>
+              </form>
             </li>
 
             <li>
