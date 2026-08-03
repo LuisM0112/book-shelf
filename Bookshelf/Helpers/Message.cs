@@ -14,4 +14,10 @@ public static class Messages
   {
     public const string InvalidCredentials = "El nombre de usuario, correo electrónico o contraseña son incorrectos.";
   }
+
+  public static class Account
+  {
+    public const string UsernameMismatch = "El nombre de usuario no coincide.";
+    public const string DeleteFailed = "No se ha podido eliminar la cuenta.";
+  }
 }

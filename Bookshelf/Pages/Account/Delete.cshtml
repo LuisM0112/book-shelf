@@ -1,0 +1,69 @@
+@page
+@model Bookshelf.Pages.Account.DeleteModel
+
+@{
+  ViewData["Title"] = "Eliminar cuenta";
+}
+
+<section class="container py-4">
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+      <article class="card border-danger shadow-sm">
+
+        <div class="card-body">
+
+          <header class="mb-4">
+            <h1 class="h3 text-danger">
+              Eliminar cuenta
+            </h1>
+
+            <p class="mb-0">
+              Esta acción es permanente y no puede deshacerse.
+            </p>
+
+            <p>
+              Escribe tu nombre de usuario para confirmar.
+            </p>
+          </header>
+
+          <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3">
+            </div>
+
+            <fieldset>
+
+              <legend class="visually-hidden">
+                Confirmación
+              </legend>
+
+              <div class="mb-4">
+
+                <label asp-for="Delete.Username" class="form-label"></label>
+
+                <input asp-for="Delete.Username" class="form-control" />
+
+                <span asp-validation-for="Delete.Username" class="text-danger"></span>
+
+              </div>
+
+            </fieldset>
+
+            <button type="submit" class="btn btn-danger w-100">
+              Eliminar cuenta
+            </button>
+
+          </form>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
