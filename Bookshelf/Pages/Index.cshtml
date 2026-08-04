@@ -1,10 +1,60 @@
 ﻿@page
 @model IndexModel
+@using Bookshelf.Models.DTOs.Books
+
 @{
-    ViewData["Title"] = "Home page";
+  ViewData["Title"] = "Catálogo";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section>
+
+  <header class="mb-4">
+    <h1>Catálogo</h1>
+    @if (User.IsInRole("Admin"))
+    {
+      <a asp-page="/Books/Create" class="btn btn-primary">
+        Nuevo libro
+      </a>
+    }
+  </header>
+
+  @if (!Model.Books.Any())
+  {
+    <p>No hay libros disponibles.</p>
+  }
+  else
+  {
+    <div class="list-group">
+
+      @foreach (BookListDto book in Model.Books)
+      {
+        <article class="list-group-item">
+
+          <h2 class="h5 mb-1">
+            @book.Title
+          </h2>
+
+          <p class="mb-3">
+            @book.Author
+          </p>
+
+          @if (book.IsFollowing)
+          {
+            <button class="btn btn-success" disabled>
+              Siguiendo
+            </button>
+          }
+          else
+          {
+            <button class="btn btn-primary">
+              Seguir
+            </button>
+          }
+
+        </article>
+      }
+
+    </div>
+  }
+
+</section>
