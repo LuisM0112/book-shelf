@@ -50,4 +50,45 @@ public class BookService : IBookService
 
     return true;
   }
+
+  public async Task<EditBookDto?> GetForEditAsync(int id)
+  {
+    return await _context.Books
+      .Where(book => book.Id == id)
+      .Select(book => new EditBookDto
+      {
+        Id = book.Id,
+        Title = book.Title,
+        Author = book.Author,
+        ISBN = book.ISBN
+      })
+      .FirstOrDefaultAsync();
+  }
+
+  public async Task<bool> UpdateAsync(EditBookDto dto)
+  {
+    bool isbnExists = await _context.Books.AnyAsync(book =>
+      book.ISBN == dto.ISBN &&
+      book.Id != dto.Id);
+
+    if (isbnExists)
+    {
+      return false;
+    }
+
+    Book? book = await _context.Books.FindAsync(dto.Id);
+
+    if (book is null)
+    {
+      return false;
+    }
+
+    book.Title = dto.Title;
+    book.Author = dto.Author;
+    book.ISBN = dto.ISBN;
+
+    await _context.SaveChangesAsync();
+
+    return true;
+  }
 }

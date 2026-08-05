@@ -51,6 +51,13 @@
             </button>
           }
 
+          @if (User.IsInRole("Admin"))
+          {
+            <a asp-page="/Books/Edit" asp-route-id="@book.Id" class="btn btn-primary">
+              Editar
+            </a>
+          }
+
         </article>
       }
 
