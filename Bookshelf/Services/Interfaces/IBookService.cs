@@ -11,4 +11,6 @@ public interface IBookService
   Task<EditBookDto?> GetForEditAsync(int id);
 
   Task<bool> UpdateAsync(EditBookDto dto);
+
+  Task<bool> DeleteAsync(int id);
 }

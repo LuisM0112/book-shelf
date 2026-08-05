@@ -91,4 +91,20 @@ public class BookService : IBookService
 
     return true;
   }
+
+  public async Task<bool> DeleteAsync(int id)
+  {
+    Book? book = await _context.Books.FindAsync(id);
+
+    if (book is null)
+    {
+      return false;
+    }
+
+    _context.Books.Remove(book);
+
+    await _context.SaveChangesAsync();
+
+    return true;
+  }
 }

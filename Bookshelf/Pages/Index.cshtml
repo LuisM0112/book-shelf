@@ -56,6 +56,22 @@
             <a asp-page="/Books/Edit" asp-route-id="@book.Id" class="btn btn-primary">
               Editar
             </a>
+
+            <form method="post"
+              asp-page="/Books/Delete"
+              asp-route-id="@book.Id"
+              class="d-inline confirm-form"
+              data-title="¿Eliminar libro?"
+              data-text="Se eliminará '@book.Title'. Esta acción no puede deshacerse."
+              data-confirm-button="Eliminar"
+              data-icon="warning">
+
+            <button type="submit"
+                    class="btn btn-outline-danger">
+                Eliminar
+            </button>
+
+        </form>
           }
 
         </article>
