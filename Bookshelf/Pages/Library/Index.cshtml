@@ -1,0 +1,51 @@
+@page
+@model Bookshelf.Pages.Library.IndexModel
+@using Bookshelf.Models.DTOs.Library
+
+@{
+  ViewData["Title"] = "Mi biblioteca";
+}
+
+<section>
+
+  <header class="mb-4">
+    <h1>Mi biblioteca</h1>
+  </header>
+
+  @if (!Model.Books.Any())
+  {
+    <p>Todavía no sigues ningún libro.</p>
+  }
+  else
+  {
+    <div class="list-group">
+
+      @foreach (LibraryBookDto book in Model.Books)
+      {
+        <article class="list-group-item">
+
+          <h2 class="h5 mb-1">
+            @book.Title
+          </h2>
+
+          <p class="mb-2">
+            @book.Author
+          </p>
+
+          <p class="mb-0">
+            Estado:
+            <strong>@book.Status</strong>
+          </p>
+
+          <p class="mb-0">
+            Valoración:
+            @(book.Rating?.ToString() ?? "-")
+          </p>
+
+        </article>
+      }
+
+    </div>
+  }
+
+</section>

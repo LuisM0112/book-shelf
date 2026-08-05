@@ -7,7 +7,7 @@ public interface ILibraryService
 {
   Task<bool> FollowAsync(string userId, int bookId);
 
-  Task<IEnumerable<UserBookDto>> GetLibraryAsync(string userId);
+  Task<IEnumerable<LibraryBookDto>> GetLibraryAsync(string userId);
 
   Task<bool> UpdateStatusAsync(string userId, int bookId, BookStatus status);
 

@@ -47,9 +47,20 @@ public class LibraryService : ILibraryService
     return true;
   }
 
-  public Task<IEnumerable<UserBookDto>> GetLibraryAsync(string userId)
+  public async Task<IEnumerable<LibraryBookDto>> GetLibraryAsync(string userId)
   {
-    throw new NotImplementedException();
+    return await _context.UserBooks
+      .Where(userBook => userBook.UserId == userId)
+      .Select(userBook => new LibraryBookDto
+      {
+        BookId = userBook.BookId,
+        Title = userBook.Book.Title,
+        Author = userBook.Book.Author,
+        Status = userBook.Status,
+        Rating = userBook.Rating
+      })
+      .OrderBy(book => book.Title)
+      .ToListAsync();
   }
 
   public Task<bool> UnfollowAsync(string userId, int bookId)
