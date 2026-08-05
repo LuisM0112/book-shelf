@@ -142,6 +142,32 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js"></script>
 
 
+<script>
+  document.querySelectorAll(".confirm-form").forEach(form => {
+
+    form.addEventListener("submit", async function (event) {
+
+      event.preventDefault();
+
+      const result = await Swal.fire({
+        title: form.dataset.title,
+        text: form.dataset.text,
+        icon: form.dataset.icon ?? "warning",
+        showCancelButton: true,
+        confirmButtonText: form.dataset.confirmButton ?? "Aceptar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true
+      });
+
+      if (result.isConfirmed) {
+        form.submit();
+      }
+
+    });
+
+  });
+</script>
+
 @await RenderSectionAsync("Scripts", required: false)
 
 </body>
