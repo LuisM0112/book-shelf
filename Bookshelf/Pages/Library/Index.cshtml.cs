@@ -44,4 +44,13 @@ public class IndexModel : PageModel
 
     return RedirectToPage();
   }
+
+  public async Task<IActionResult> OnPostUnfollowAsync(int bookId)
+  {
+    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+    await _libraryService.UnfollowAsync(userId, bookId);
+
+    return RedirectToPage();
+  }
 }

@@ -33,21 +33,34 @@ public class IndexModel : PageModel
     Books = await _bookService.GetCatalogAsync(user?.Id);
   }
 
+  private string? GetUserId()
+  {
+    return User.FindFirstValue(ClaimTypes.NameIdentifier);
+  }
+
   public async Task<IActionResult> OnPostFollowAsync(int id)
   {
-    if (!User.Identity?.IsAuthenticated ?? true)
-    {
-      return Challenge();
-    }
-
-    string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+    string? userId = GetUserId();
     if (userId is null)
     {
       return Challenge();
     }
 
     await _libraryService.FollowAsync(userId, id);
+
+    return RedirectToPage();
+  }
+
+  public async Task<IActionResult> OnPostUnfollowAsync(int id)
+  {
+    string? userId = GetUserId();
+
+    if (userId is null)
+    {
+      return Challenge();
+    }
+
+    await _libraryService.UnfollowAsync(userId, id);
 
     return RedirectToPage();
   }

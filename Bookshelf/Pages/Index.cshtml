@@ -42,9 +42,20 @@
           {
             @if (book.IsFollowing)
             {
-              <button class="btn btn-success" disabled>
-                Siguiendo
-              </button>
+              <form method="post"
+                    asp-page-handler="Unfollow"
+                    asp-route-id="@book.Id"
+                    class="d-inline confirm-form"
+                    data-title="¿Dejar de seguir?"
+                    data-text="El libro '@book.Title' desaparecerá de tu biblioteca."
+                    data-confirm-button="Dejar de seguir"
+                    data-icon="warning">
+
+                <button type="submit" class="btn btn-success">
+                  Siguiendo
+                </button>
+
+              </form>
             }
             else
             {

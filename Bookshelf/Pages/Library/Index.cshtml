@@ -108,6 +108,22 @@
 
           </form>
 
+          <form method="post"
+                asp-page-handler="Unfollow"
+                class="confirm-form mt-3"
+                data-title="¿Dejar de seguir el libro?"
+                data-text="El libro '@book.Title' desaparecerá de tu biblioteca."
+                data-confirm-button="Dejar de seguir"
+                data-icon="warning">
+
+            <input type="hidden" name="bookId" value="@book.BookId" />
+
+            <button type="submit" class="btn btn-outline-danger">
+              Dejar de seguir
+            </button>
+
+          </form>
+
         </article>
       }
 

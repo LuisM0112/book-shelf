@@ -63,11 +63,6 @@ public class LibraryService : ILibraryService
       .ToListAsync();
   }
 
-  public Task<bool> UnfollowAsync(string userId, int bookId)
-  {
-    throw new NotImplementedException();
-  }
-
   public async Task<bool> UpdateStatusAsync(string userId, int bookId, BookStatus status)
   {
     UserBook? userBook = await _context.UserBooks
@@ -100,6 +95,25 @@ public class LibraryService : ILibraryService
     }
 
     userBook.Rating = rating;
+
+    await _context.SaveChangesAsync();
+
+    return true;
+  }
+
+  public async Task<bool> UnfollowAsync(string userId, int bookId)
+  {
+    UserBook? userBook = await _context.UserBooks
+      .FirstOrDefaultAsync(userBook =>
+        userBook.UserId == userId &&
+        userBook.BookId == bookId);
+
+    if (userBook is null)
+    {
+      return false;
+    }
+
+    _context.UserBooks.Remove(userBook);
 
     await _context.SaveChangesAsync();
 
