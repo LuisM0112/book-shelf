@@ -1,5 +1,6 @@
 using Bookshelf.Data;
 using Bookshelf.Models;
+using Bookshelf.Services.Implementations;
 using Bookshelf.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ builder.Services
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<ILibraryService, LibraryService>();
 
 WebApplication app = builder.Build();
 
