@@ -38,7 +38,7 @@
             <input type="hidden" name="bookId" value="@book.BookId" />
 
             <label class="form-label">
-                Estado
+              Estado
             </label>
 
             <select name="status" class="form-select" onchange="this.form.submit()">
@@ -63,10 +63,50 @@
 
           </form>
 
-          <p class="mb-0">
-            Valoración:
-            @(book.Rating?.ToString() ?? "-")
-          </p>
+          <form method="post"
+                asp-page-handler="Rating"
+                class="mt-3">
+
+            <input type="hidden" name="bookId" value="@book.BookId" />
+
+            <label class="form-label">
+              Valoración
+            </label>
+
+            <select name="rating" class="form-select" onchange="this.form.submit()">
+
+              @if (book.Rating is null)
+              {
+                <option value="" selected>
+                  Sin valorar
+                </option>
+              }
+              else
+              {
+                <option value="">
+                  Sin valorar
+                </option>
+              }
+
+              @for (int i = 1; i <= 5; i++)
+              {
+                if (book.Rating == i)
+                {
+                  <option value="@i" selected>
+                    @i
+                  </option>
+                }
+                else
+                {
+                  <option value="@i">
+                    @i
+                  </option>
+                }
+              }
+
+            </select>
+
+          </form>
 
         </article>
       }

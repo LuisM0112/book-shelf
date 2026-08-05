@@ -35,4 +35,13 @@ public class IndexModel : PageModel
 
     return RedirectToPage();
   }
+
+  public async Task<IActionResult> OnPostRatingAsync(int bookId, int? rating)
+  {
+    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+
+    await _libraryService.UpdateRatingAsync(userId, bookId, rating);
+
+    return RedirectToPage();
+  }
 }
