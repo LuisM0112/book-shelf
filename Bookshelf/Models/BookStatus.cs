@@ -4,5 +4,6 @@ public enum BookStatus
 {
   Pending,
   Reading,
-  Finished
+  Finished,
+  Dropped
 }

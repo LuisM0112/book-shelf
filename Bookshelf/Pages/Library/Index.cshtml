@@ -1,6 +1,7 @@
 @page
 @model Bookshelf.Pages.Library.IndexModel
 @using Bookshelf.Models.DTOs.Library
+@using Bookshelf.Helpers
 
 @{
   ViewData["Title"] = "Mi biblioteca";
@@ -32,10 +33,35 @@
             @book.Author
           </p>
 
-          <p class="mb-0">
-            Estado:
-            <strong>@book.Status</strong>
-          </p>
+          <form method="post" asp-page-handler="Status" class="mt-2">
+
+            <input type="hidden" name="bookId" value="@book.BookId" />
+
+            <label class="form-label">
+                Estado
+            </label>
+
+            <select name="status" class="form-select" onchange="this.form.submit()">
+
+              @foreach (var status in BookStatusHelper.GetAllStatus())
+              {
+                if (status.Key == book.Status)
+                {
+                  <option value="@status.Key" selected>
+                    @status.Value
+                  </option>
+                }
+                else
+                {
+                  <option value="@status.Key">
+                    @status.Value
+                  </option>
+                }
+              }
+
+            </select>
+
+          </form>
 
           <p class="mb-0">
             Valoración:
