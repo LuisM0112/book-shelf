@@ -40,4 +40,20 @@ public class IndexModel : PageModel
 
     return RedirectToPage();
   }
+
+  public async Task<IActionResult> OnPostRejectAsync(int id)
+  {
+    bool rejected = await _proposalService.RejectAsync(id);
+
+    if (!rejected)
+    {
+      TempData["Error"] = Messages.Proposal.RejectError;
+
+      return RedirectToPage();
+    }
+
+    TempData["Mensaje"] = Messages.Proposal.RejectSuccess;
+
+    return RedirectToPage();
+  }
 }

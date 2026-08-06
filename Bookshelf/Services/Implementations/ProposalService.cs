@@ -102,8 +102,20 @@ public class ProposalService : IProposalService
     return true;
   }
 
-  public Task<bool> RejectAsync(int proposalId)
+  public async Task<bool> RejectAsync(int proposalId)
   {
-    throw new NotImplementedException();
+    BookProposal? proposal = await _context.BookProposals
+      .FirstOrDefaultAsync(proposal => proposal.Id == proposalId);
+
+    if (proposal is null)
+    {
+      return false;
+    }
+
+    proposal.Status = ProposalStatus.Rejected;
+
+    await _context.SaveChangesAsync();
+
+    return true;
   }
 }
