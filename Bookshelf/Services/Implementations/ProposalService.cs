@@ -67,9 +67,39 @@ public class ProposalService : IProposalService
       .ToListAsync();
   }
 
-  public Task<bool> AcceptAsync(int proposalId)
+  public async Task<bool> AcceptAsync(int proposalId)
   {
-    throw new NotImplementedException();
+    BookProposal? proposal = await _context.BookProposals
+      .FirstOrDefaultAsync(proposal => proposal.Id == proposalId);
+
+    if (proposal is null)
+    {
+      return false;
+    }
+
+    bool isbnExists = await _context.Books
+      .AnyAsync(book => book.ISBN == proposal.ISBN);
+
+    if (isbnExists)
+    {
+      return false;
+    }
+
+    Book book = new()
+    {
+      Title = proposal.Title,
+      Author = proposal.Author,
+      ReleaseDate = proposal.ReleaseDate,
+      ISBN = proposal.ISBN
+    };
+
+    _context.Books.Add(book);
+
+    proposal.Status = ProposalStatus.Accepted;
+
+    await _context.SaveChangesAsync();
+
+    return true;
   }
 
   public Task<bool> RejectAsync(int proposalId)

@@ -32,5 +32,7 @@ public static class Messages
   public static class Proposal
   {
     public const string DuplicateProposal = "El libro ya existe en el catálogo o ya hay una propuesta pendiente para él.";
+    public const string AcceptError = "No se ha podido aceptar la propuesta.";
+    public const string AcceptSuccess = "La propuesta se ha aceptado correctamente.";
   }
 }
