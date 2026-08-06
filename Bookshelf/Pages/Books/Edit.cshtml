@@ -31,6 +31,12 @@
     </div>
 
     <div class="mb-3">
+      <label asp-for="Book.ReleaseDate" class="form-label"></label>
+      <input asp-for="Book.ReleaseDate" class="form-control" />
+      <span asp-validation-for="Book.ReleaseDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
       <label asp-for="Book.ISBN" class="form-label"></label>
       <input asp-for="Book.ISBN" class="form-control" />
       <span asp-validation-for="Book.ISBN" class="text-danger"></span>

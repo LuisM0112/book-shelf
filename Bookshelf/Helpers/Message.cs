@@ -25,6 +25,7 @@ public static class Messages
   {
     public const string TitleRequired = "El título es obligatorio.";
     public const string AuthorRequired = "El autor es obligatorio.";
+    public const string DateRequired = "La fecha de publicación es obligatoria.";
     public const string IsbnRequired = "El ISBN es obligatorio.";
     public const string IsbnAlreadyExists = "Ya existe un libro con ese ISBN.";
   }

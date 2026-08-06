@@ -7,13 +7,16 @@ public class CreateProposalDto
 {
   [Required(ErrorMessage = Messages.Book.TitleRequired)]
   [StringLength(200)]
+  [Display(Name = "Titulo")]
   public string Title { get; set; } = string.Empty;
 
   [Required(ErrorMessage = Messages.Book.AuthorRequired)]
   [StringLength(150)]
+  [Display(Name = "Autor")]
   public string Author { get; set; } = string.Empty;
 
-  [Required]
+  [Required(ErrorMessage = Messages.Book.DateRequired)]
+  [Display(Name = "Fecha de publicación")]
   public DateOnly ReleaseDate { get; set; }
 
   [Required(ErrorMessage = Messages.Book.IsbnRequired)]

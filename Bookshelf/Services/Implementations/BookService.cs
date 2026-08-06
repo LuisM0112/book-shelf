@@ -41,6 +41,7 @@ public class BookService : IBookService
     {
       Title = createBookDto.Title,
       Author = createBookDto.Author,
+      ReleaseDate = createBookDto.ReleaseDate,
       ISBN = createBookDto.ISBN
     };
 
@@ -60,6 +61,7 @@ public class BookService : IBookService
         Id = book.Id,
         Title = book.Title,
         Author = book.Author,
+        ReleaseDate = book.ReleaseDate,
         ISBN = book.ISBN
       })
       .FirstOrDefaultAsync();
@@ -85,6 +87,7 @@ public class BookService : IBookService
 
     book.Title = dto.Title;
     book.Author = dto.Author;
+    book.ReleaseDate = dto.ReleaseDate;
     book.ISBN = dto.ISBN;
 
     await _context.SaveChangesAsync();
