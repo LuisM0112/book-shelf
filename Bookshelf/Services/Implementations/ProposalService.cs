@@ -50,9 +50,21 @@ public class ProposalService : IProposalService
     return true;
   }
 
-  public Task<IEnumerable<ProposalListDto>> GetPendingAsync()
+  public async Task<IEnumerable<ProposalListDto>> GetPendingAsync()
   {
-    throw new NotImplementedException();
+    return await _context.BookProposals
+      .Where(proposal => proposal.Status == ProposalStatus.Pending)
+      .OrderBy(proposal => proposal.Title)
+      .Select(proposal => new ProposalListDto
+      {
+        Id = proposal.Id,
+        Title = proposal.Title,
+        Author = proposal.Author,
+        ReleaseDate = proposal.ReleaseDate,
+        ISBN = proposal.ISBN,
+        ProposedBy = proposal.User.UserName!
+      })
+      .ToListAsync();
   }
 
   public Task<bool> AcceptAsync(int proposalId)

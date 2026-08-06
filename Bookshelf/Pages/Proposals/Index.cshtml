@@ -1,0 +1,97 @@
+@page
+@model Bookshelf.Pages.Proposals.IndexModel
+@using Bookshelf.Models.DTOs.Proposals
+
+@{
+  ViewData["Title"] = "Propuestas";
+}
+
+<section>
+
+  <header class="mb-4">
+    <h1>Propuestas</h1>
+  </header>
+
+  @if (!Model.Proposals.Any())
+  {
+    <p>No hay propuestas pendientes.</p>
+  }
+  else
+  {
+    <div class="list-group">
+
+      @foreach (ProposalListDto proposal in Model.Proposals)
+      {
+        <article class="list-group-item">
+
+          <header class="mb-3">
+
+            <h2 class="h5 mb-1">
+              @proposal.Title
+            </h2>
+
+            <p class="mb-1">
+              @proposal.Author
+            </p>
+
+            <small class="text-secondary">
+              ISBN: @proposal.ISBN
+            </small>
+
+            <br />
+
+            <small class="text-secondary">
+              Fecha de publicación:
+              @proposal.ReleaseDate.ToString("dd/MM/yyyy")
+            </small>
+
+            <br />
+
+            <small class="text-secondary">
+              Propuesto por:
+              @proposal.ProposedBy
+            </small>
+
+          </header>
+
+          <div class="d-flex gap-2">
+
+            <form method="post"
+                  asp-page-handler="Accept"
+                  asp-route-id="@proposal.Id"
+                  class="confirm-form"
+                  data-title="¿Aceptar propuesta?"
+                  data-text="Se añadirá '@proposal.Title' al catálogo."
+                  data-confirm-button="Aceptar"
+                  data-icon="question">
+
+              <button type="submit" class="btn btn-success">
+                Aceptar
+              </button>
+
+            </form>
+
+            <form method="post"
+                  asp-page-handler="Reject"
+                  asp-route-id="@proposal.Id"
+                  class="confirm-form"
+                  data-title="¿Rechazar propuesta?"
+                  data-text="La propuesta será rechazada."
+                  data-confirm-button="Rechazar"
+                  data-icon="warning">
+
+              <button type="submit" class="btn btn-outline-danger">
+                Rechazar
+              </button>
+
+            </form>
+
+          </div>
+
+        </article>
+      }
+
+    </div>
+  }
+
+</section>
