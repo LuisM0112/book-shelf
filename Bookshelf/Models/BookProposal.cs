@@ -20,4 +20,6 @@ public class BookProposal
   public string UserId { get; set; } = string.Empty;
 
   public User User { get; set; } = null!;
+
+  public ProposalStatus Status { get; set; } = ProposalStatus.Pending;
 }
