@@ -1,0 +1,57 @@
+@page
+@model Bookshelf.Pages.Proposals.CreateModel
+
+@{
+  ViewData["Title"] = "Proponer libro";
+}
+
+<section>
+
+  <header class="mb-4">
+    <h1>Proponer libro</h1>
+  </header>
+
+  <form method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3">
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Proposal.Title" class="form-label"></label>
+
+      <input asp-for="Proposal.Title" class="form-control" />
+
+      <span asp-validation-for="Proposal.Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Proposal.Author" class="form-label"></label>
+
+      <input asp-for="Proposal.Author" class="form-control" />
+
+      <span asp-validation-for="Proposal.Author" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+      <label asp-for="Proposal.ReleaseDate" class="form-label"></label>
+
+      <input asp-for="Proposal.ReleaseDate" class="form-control" />
+
+      <span asp-validation-for="Proposal.ReleaseDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+      <label asp-for="Proposal.ISBN" class="form-label"></label>
+
+      <input asp-for="Proposal.ISBN" class="form-control" />
+
+      <span asp-validation-for="Proposal.ISBN" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+      Enviar propuesta
+    </button>
+
+  </form>
+
+</section>

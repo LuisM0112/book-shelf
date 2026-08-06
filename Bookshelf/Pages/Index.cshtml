@@ -10,6 +10,12 @@
 
   <header class="mb-4">
     <h1>Catálogo</h1>
+    @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
+    {
+      <a asp-page="/Proposals/Create" class="btn btn-outline-primary">
+        Proponer libro
+      </a>
+    }
     @if (User.IsInRole("Admin"))
     {
       <a asp-page="/Books/Create" class="btn btn-primary">

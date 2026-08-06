@@ -28,4 +28,9 @@ public static class Messages
     public const string IsbnRequired = "El ISBN es obligatorio.";
     public const string IsbnAlreadyExists = "Ya existe un libro con ese ISBN.";
   }
+
+  public static class Proposal
+  {
+    public const string DuplicateProposal = "El libro ya existe en el catálogo o ya hay una propuesta pendiente para él.";
+  }
 }

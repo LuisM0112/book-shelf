@@ -27,6 +27,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ILibraryService, LibraryService>();
+builder.Services.AddScoped<IProposalService, ProposalService>();
 
 WebApplication app = builder.Build();
 
